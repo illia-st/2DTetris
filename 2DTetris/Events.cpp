@@ -1,7 +1,7 @@
 #include "Events.h"
 #include "SFML/Graphics.hpp"
 
-Events Event_Check(sf::Event event) {
+Events Event_Check(const sf::Event& event) {
 	if (event.type == sf::Event::Closed) {
 		return Events::Close;
 	}
