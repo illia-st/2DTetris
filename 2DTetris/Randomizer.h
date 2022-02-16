@@ -1,2 +1,7 @@
 #pragma once
-int getRandomNumber(int min, int max);
+class Randomizer {
+public:
+	static int getRandomNumber(int min, int max);
+private:
+	Randomizer() {};
+};

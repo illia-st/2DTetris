@@ -143,6 +143,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Events.cpp" />
+    <ClCompile Include="Game_Process.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Randomizer.cpp" />
   </ItemGroup>
@@ -151,7 +152,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Events.h" />
-    <ClInclude Include="Main.h" />
+    <ClInclude Include="Game_Process.h" />
     <ClInclude Include="Randomizer.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
