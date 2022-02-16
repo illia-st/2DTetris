@@ -19,9 +19,6 @@ void Game_Process::DeleteFilledLines(sf::RenderWindow& window_) {
 		std::vector<int> notEmpty;
 		for (int j = Width - 1; j >= 0; --j) {
 			if (Field[i][j] != 0) {
-				if (i == 0) {
-					window_.close();
-				}
 				notEmpty.push_back(j);
 			}
 		}
@@ -40,7 +37,8 @@ void Game_Process::DeleteFilledLines(sf::RenderWindow& window_) {
 		++counter;
 	}
 }
-void Game_Process::TheGame(float& timer_, float& delay_, int& type_, sf::Clock& clock, sf::RenderWindow& window_, sf::Sprite& sprite_, bool& beginGame_) {
+void Game_Process::TheGame(float& timer_, float& delay_, int& type_, sf::Clock& clock, sf::RenderWindow& window_, 
+	sf::Sprite& sprite_, sf::Sprite& frame, sf::Sprite& background, bool& beginGame_) {
 	float time = clock.getElapsedTime().asSeconds();
 	clock.restart();
 	timer_ += time;
@@ -106,6 +104,8 @@ void Game_Process::TheGame(float& timer_, float& delay_, int& type_, sf::Clock& 
 	delay_ = 0.3;
 	window_.clear(sf::Color::White);
 
+	window_.draw(background);
+
 	DeleteFilledLines(window_);
 
 	for (int i = 0; i < Height; ++i) {
@@ -116,6 +116,7 @@ void Game_Process::TheGame(float& timer_, float& delay_, int& type_, sf::Clock& 
 			int figure = Field[i][j] == -1 ? 0 : Field[i][j];
 			sprite_.setTextureRect(sf::IntRect(figure * Size_of_sprite, 0, Size_of_sprite, Size_of_sprite));
 			sprite_.setPosition(j * Size_of_sprite, i * Size_of_sprite);
+			sprite_.move(28, 31);
 			window_.draw(sprite_);
 		}
 
@@ -125,12 +126,27 @@ void Game_Process::TheGame(float& timer_, float& delay_, int& type_, sf::Clock& 
 		sprite_.setTextureRect(sf::IntRect(type_ * Size_of_sprite, 0, Size_of_sprite, Size_of_sprite));
 
 		sprite_.setPosition(Figure[i].x * Size_of_sprite, Figure[i].y * Size_of_sprite);
-
+		sprite_.move(28, 31);
 		window_.draw(sprite_);
 	}
+	
+	window_.draw(frame);
 
 	window_.display();
+	
+	if (Check_if_lose(window_)) {
+		return;
+	}
 }
 int Game_Process::Get_figures_size() {
 	return Figures.size();
+}
+bool Game_Process::Check_if_lose(sf::Window& window) {
+	for (int j = 0; j < Width; ++j) {
+		if (Field[2][j]) {
+			window.close();
+			return true;
+		}
+	}
+	return false;
 }

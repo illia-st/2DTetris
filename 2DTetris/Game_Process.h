@@ -16,6 +16,9 @@ private:
 	const int Amount_of_figures = 7;
 	const int Size_of_figures = 4;
 	const int Size_of_sprite = 18;
+	
+	int Score = 0;
+	int Deleted_lines = 0;
 
 	std::vector<std::vector<int>> Field = std::vector<std::vector<int>>(Height, std::vector<int>(Width));
 
@@ -40,10 +43,11 @@ private:
 	
 	void DeleteFilledLines(sf::RenderWindow& window_);
 
-
+	bool Check_if_lose(sf::Window& window);
 public:
 
-	void TheGame(float& timer_, float& delay_, int& type_, sf::Clock& clock, sf::RenderWindow& window_, sf::Sprite& sprite_, bool& beginGame_);
+	void TheGame(float& timer_, float& delay_, int& type_, sf::Clock& clock, sf::RenderWindow& window_,
+		sf::Sprite& sprite_, sf::Sprite& frame, sf::Sprite& background, bool& beginGame_);
 
 	int Get_figures_size();
 };

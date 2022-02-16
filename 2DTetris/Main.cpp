@@ -9,9 +9,11 @@ int main() {
 
 	sf::RenderWindow window(sf::VideoMode(320, 480), "Tetris");
 
-	sf::Texture texture;
+	sf::Texture texture, texture_background, texture_frame;
 	texture.loadFromFile("Sprites\\tiles.png");
-	sf::Sprite sprite(texture);
+	texture_background.loadFromFile("Sprites\\background.png");
+	texture_frame.loadFromFile("Sprites\\frame.png");
+	sf::Sprite sprite(texture), sprite_background(texture_background), sprite_frame(texture_frame);
 	Game_Process game;
 	int type = Randomizer::getRandomNumber(0, game.Get_figures_size() - 1);
 	
@@ -21,7 +23,7 @@ int main() {
 	sf::Clock clock;
 
 	while (window.isOpen()) {
-		game.TheGame(timer, delay, type, clock, window, sprite, beginGame);
+		game.TheGame(timer, delay, type, clock, window, sprite, sprite_frame, sprite_background, beginGame);
 	}
 
 	return 0;
